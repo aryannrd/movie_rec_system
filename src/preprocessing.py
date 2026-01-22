@@ -14,7 +14,7 @@ def preprocess(df):
     text_columns = ['title', 'overview', 'genres', 'keywords']
     for col in text_columns:
         if col in df.columns:
-            df[col] = df[col].fillna('')
+            df[col] = df[col].fillna('').astype(str)
             df[col] = df[col].apply(clean_text)
         else:
             df[col] = ''
@@ -25,5 +25,7 @@ def preprocess(df):
             df['genres'] + ' ' +
             df['keywords']
     ).str.strip()
+
+
 
     return df
